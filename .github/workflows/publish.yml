@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Python dependencies via Conda & Pip
         run: |
-          conda install -n r-reticulate numpy pandas scipy matplotlib statsmodels scikit-learn plotnine pip -y
+          conda install -n r-reticulate numpy pandas scipy matplotlib statsmodels scikit-learn plotnine pip expat -y
           conda run -n r-reticulate python -m pip install --upgrade pip
           conda run -n r-reticulate python -m pip install pylahman pandas-nhanes siuba
           conda run -n r-reticulate python -c "import pylahman; print('pylahman OK')"
@@ -57,7 +57,10 @@ jobs:
       - name: Render Quarto
         run: |
           conda activate r-reticulate
-          export RETICULATE_PYTHON=$(conda info --base)/envs/r-reticulate/bin/python
+
+          CONDA_ENV=$(conda info --base)/envs/r-reticulate
+          export RETICULATE_PYTHON=$CONDA_ENV/bin/python
+          export LD_LIBRARY_PATH=$CONDA_ENV/lib:$LD_LIBRARY_PATH
 
           cp README.md index.md
 
