@@ -56,7 +56,15 @@ jobs:
         run: |
           conda activate r-reticulate
           export RETICULATE_PYTHON=$(conda info --base)/envs/r-reticulate/bin/python
-          quarto render
+
+          cp README.md index.md
+
+          quarto render index.md --to html
+          quarto render hw03.qmd --to html
+          quarto render hw03.qmd --to ipynb
+
+          mkdir -p _site
+          cp index.html hw03.html hw03.ipynb _site/
         shell: bash -l {0}
 
       - name: Deploy to GitHub Pages

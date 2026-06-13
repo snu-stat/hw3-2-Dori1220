@@ -41,4 +41,5 @@ ENV RETICULATE_PYTHON=/opt/conda/envs/r-reticulate/bin/python
 RUN chown -R ${NB_USER:-root} /opt/conda
 
 # 기본 실행 경로 설정
+COPY . /home/rstudio/
 WORKDIR /home/rstudio
