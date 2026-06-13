@@ -58,9 +58,6 @@ jobs:
           quarto render index.md --to html
           quarto render hw03.qmd --to html
           quarto render hw03.qmd --to ipynb
-
-          mkdir -p _site
-          cp index.html hw03.html hw03.ipynb _site/
         shell: bash
 
       - name: Deploy to GitHub Pages
