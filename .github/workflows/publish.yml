@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Python dependencies via Conda & Pip
         run: |
-          conda install -n r-reticulate numpy pandas scipy matplotlib statsmodels scikit-learn plotnine -y
+          conda install -n r-reticulate numpy pandas scipy matplotlib statsmodels scikit-learn plotnine pip -y
           conda run -n r-reticulate python -m pip install --upgrade pip
           conda run -n r-reticulate python -m pip install pylahman pandas-nhanes siuba
           conda run -n r-reticulate python -c "import pylahman; print('pylahman OK')"

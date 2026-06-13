@@ -24,7 +24,7 @@ RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkg
     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 RUN conda create -n r-reticulate python=3.10 -y && \
-    conda install -n r-reticulate -c conda-forge numpy pandas matplotlib scipy statsmodels jupyter ipykernel -y && \
+    conda install -n r-reticulate -c conda-forge numpy pandas matplotlib scipy statsmodels jupyter ipykernel pip -y && \
     /opt/conda/envs/r-reticulate/bin/pip install pylahman pandas-nhanes
 # 추가로 필요한 패키지 설치
 
