@@ -20,21 +20,16 @@ jobs:
         run: |
           sudo apt-get update
 
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          auto-update-conda: true
           python-version: '3.10'
-          activate-environment: r-reticulate
-          channels: conda-forge,defaults
 
-      - name: Install Python dependencies via Conda & Pip
+      - name: Install Python packages
         run: |
-          conda install -n r-reticulate numpy pandas scipy matplotlib statsmodels scikit-learn plotnine pip expat -y
-          conda run -n r-reticulate python -m pip install --upgrade pip
-          conda run -n r-reticulate python -m pip install pylahman pandas-nhanes siuba
-          conda run -n r-reticulate python -c "import pylahman; print('pylahman OK')"
-        shell: bash -l {0}
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy matplotlib statsmodels scikit-learn plotnine jupyter pylahman pandas-nhanes siuba
+          python -c "import pylahman; print('pylahman OK')"
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -56,11 +51,7 @@ jobs:
 
       - name: Render Quarto
         run: |
-          conda activate r-reticulate
-
-          CONDA_ENV=$(conda info --base)/envs/r-reticulate
-          export RETICULATE_PYTHON=$CONDA_ENV/bin/python
-          export LD_LIBRARY_PATH=$CONDA_ENV/lib:$LD_LIBRARY_PATH
+          export RETICULATE_PYTHON=$(python -c "import sys; print(sys.executable)")
 
           cp README.md index.md
 
@@ -70,7 +61,7 @@ jobs:
 
           mkdir -p _site
           cp index.html hw03.html hw03.ipynb _site/
-        shell: bash -l {0}
+        shell: bash
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
