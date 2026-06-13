@@ -138,7 +138,7 @@ table(nhanes_smoke$CurrentSmoke, useNA = "ifany")
 
 # 2. 분석에 사용할 변수 선택
 model_data <- nhanes_smoke %>%
-  select(
+  dplyr::select(
     CurrentSmoke,
     Age, Gender, Race1, Education, MaritalStatus,
     Poverty, BMI, HealthGen, PhysActive
@@ -693,7 +693,7 @@ teams22 <- Teams %>%
     logRA = log(RA),
     logRSRA = log(R / RA)
   ) %>%
-  select(
+  dplyr::select(
     yearID, lgID, teamID, name,
     W, L, G, WPct, logRSRA, logRS, logRA,
     all_of(vars_22)
@@ -1716,4 +1716,4 @@ GitHub Page를 사용하여 저장소를 웹페이지로 활용하는 부분은 
 작업을 GitHub 원격 저장소로 push한 후 숙제 2 문제 3-3의 3, 4번 과정을 반복하라.
 
 ### 답안
-
+![README.md 파일 생성](3.3.png)
